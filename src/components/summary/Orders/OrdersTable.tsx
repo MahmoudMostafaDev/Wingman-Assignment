@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/table"
 import Image from 'next/image';
 import { useReactTable, getPaginationRowModel, getCoreRowModel, PaginationState } from "@tanstack/react-table"
-import Icon, { type } from '../../Icon'
+import Icon from '../../Icon'
 import Header from './Header';
 import Body from './Body';
 
@@ -16,7 +16,7 @@ const columns = [
     {
         accessorKey: "product",
         header: "Product",
-        cell: ({ cell, row }: any) => {
+        cell: ({ _, row }: any) => {
             return (<TableCell className='flex gap-4 items-center min-w-[140px] '>
                 <Image src={row.original.product.img} alt={row.original.product.product} width={40} height={40} className='rounded-full' />
                 <p>{row.original.product.product}</p>
@@ -27,7 +27,7 @@ const columns = [
     {
         accessorKey: "date",
         header: "Date",
-        cell: ({ cell, row }: any) => {
+        cell: ({ _, row }: any) => {
             return (<TableCell className='min-w-[120px]'>
                 <p>{row.original.date.date}</p>
                 <p className='text-xs'>{row.original.date.time}</p>
@@ -37,26 +37,26 @@ const columns = [
     , {
         accessorKey: "timeSpent",
         header: "Time spent",
-        cell: ({ cell, row }: any) => {
+        cell: ({ _, row }: any) => {
             return (<TableCell className='min-w-[100px]'>{row.original.timeSpent}</TableCell>)
         }
     }, {
         accessorKey: "orderValue",
         header: "Order Value",
-        cell: ({ cell, row }: any) => {
+        cell: ({ _, row }: any) => {
             return (<TableCell>{row.original.orderValue}</TableCell>)
         }
     }
     , {
         accessorKey: "commission",
         header: "Commission",
-        cell: ({ cell, row }: any) => {
+        cell: ({ _, row }: any) => {
             return (<TableCell className='font-semibold'>{row.original.commission}</TableCell>)
         }
     }, {
         accessorKey: "empty",
         header: "",
-        cell: ({ cell, row }: any) => {
+        cell: ({ }: any) => {
             return (<><TableCell className=' text-[#8A94A6]'><button className='flex gap-4'>View Chat <Icon type={"upArrow"} color="#8A94A6" width={15} height={15} /></button></TableCell></>)
         }
     }
