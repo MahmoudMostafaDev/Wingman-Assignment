@@ -10,6 +10,7 @@ import Icon from '../../Icon'
 import Header from './Header';
 import Body from './Body';
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
 
 const columns = [
@@ -68,7 +69,7 @@ const OrdersTable = () => {
         pageSize: 5,
     });
     const getPageData = async (page: number, size: number) => {
-        const { data } = await fetch(`http://localhost:3000/api/orders?page=${page}&size=${size}`).then((res) => res.json());
+        const { data } = await fetch(`${baseUrl}/api/orders?page=${page}&size=${size}`, { cache: "no-cache" }).then((res) => res.json());
         setTdata(data)
     };
     const table = useReactTable({

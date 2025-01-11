@@ -1,8 +1,12 @@
+
 import React from 'react';
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from '../../ui/card';
+import { CardHeader, CardContent, CardTitle } from '../../ui/card';
 import GlanceCard from './GlanceCard';
+
 const Insights = async () => {
-    const res = await fetch('http://localhost:3000/api/glance', {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/glance`, {
+        cache: 'no-cache',
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

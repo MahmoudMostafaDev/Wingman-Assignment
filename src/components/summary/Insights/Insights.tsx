@@ -1,19 +1,17 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from '../../ui/card';
-import GlanceCard from '../AtGlance/GlanceCard';
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '../../ui/card';
 import ConsGraph from './ConsGraph';
-import Insights from '../AtGlance/AtGlance';
 import Icon, { type } from '../../Icon';
 import ChartCard from './ChartCard';
 import PeriodChart from './PeriodChart';
 import ForecastCard from './ForecastCard';
 type data = { day: string, ExpertsOnline: number, incoming: number, answerd: number }
-
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 const AtGlance = async () => {
-    let data = (await fetch('http://localhost:3000/api/consulation', { method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(res => res.json())) as data[];
+    let data = (await fetch(`${baseUrl}/api/consulation`, { cache: "no-cache", method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(res => res.json())) as data[];
     data = [{ day: "", ExpertsOnline: 0, incoming: data[0].incoming, answerd: data[0].answerd }, ...data, { day: " ", ExpertsOnline: 0, incoming: data[6].incoming, answerd: data[6].answerd }];
-    const weeksData = (await fetch('http://localhost:3000/api/weekPeriod', { method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(res => res.json())) as { period: string, consulations: number, orders: number }[]
-    const forecast = (await fetch('http://localhost:3000/api/forecast', { method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(res => res.json())) as string[]
+    const weeksData = (await fetch(`${baseUrl}/api/weekPeriod`, { cache: "no-cache", method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(res => res.json())) as { period: string, consulations: number, orders: number }[]
+    const forecast = (await fetch(`${baseUrl}/api/forecast`, { cache: "no-cache", method: 'GET', headers: { 'Content-Type': 'application/json' } }).then(res => res.json())) as string[]
     return (
         <>
             <CardHeader>
